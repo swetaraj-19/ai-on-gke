@@ -133,3 +133,8 @@ variable "network_configs" {
     })), {})
   })
 }
+
+variable "private_cluster" {
+  type    = bool
+  default = true
+}

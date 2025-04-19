@@ -9,7 +9,7 @@
 5. Llama
 
 
-``hcl
+```hcl
 project_id = "ai-infra-poc"
 create_network = true
 network_configs = {

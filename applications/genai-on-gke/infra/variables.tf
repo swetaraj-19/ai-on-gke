@@ -138,13 +138,53 @@ variable "repository_name" {
   description = "Google Artifact Registry repository name for GKE"
 }
 
+variable "gcs_config" {
+  type = object({
+    bucket_name = string
+  })
+}
+
+## GKE variables
+variable "create_cluster" {
+  type = bool
+}
+
 variable "private_cluster" {
   type    = bool
   default = true
 }
 
-variable "gcs_config" {
+variable "autopilot_cluster" {
+  type = bool
+}
+
+variable "gke_config" {
   type = object({
-    bucket_name   = string
+    cluster_regional = bool
+    cluster_name     = string
+    cluster_labels = optional(map(string), {
+      "gke_profile" = "ai-on-gke"
+    })
+    cluster_region                       = string
+    cluster_zones                        = list(string)
+    kubernetes_version                   = optional(string, "1.29.13-gke.1038000")
+    release_channel                      = optional(string, "REGULAR")
+    ip_range_pods                        = string
+    ip_range_services                    = string
+    monitoring_enable_managed_prometheus = bool
+    master_ipv4_cidr_block               = optional(string)
+    master_authorized_networks = optional(list(object({
+      cidr_block   = string
+      display_name = optional(string)
+    })), [])
+    cpu_pools                   = list(map(any))
+    enable_gpu                  = optional(bool, true)
+    gpu_pools                   = list(map(any))
+    enable_tpu                  = optional(bool, false)
+    tpu_pools                   = list(map(any))
+    all_node_pools_oauth_scopes = list(string)
+    all_node_pools_labels       = map(string)
+    all_node_pools_metadata     = map(string)
+    all_node_pools_tags         = list(string)
   })
 }

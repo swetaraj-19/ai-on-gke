@@ -131,7 +131,20 @@ variable "network_config" {
   })
 }
 
+
+# Google Artifact Registry variables
+variable "repository_name" {
+  type        = string
+  description = "Google Artifact Registry repository name for GKE"
+}
+
 variable "private_cluster" {
   type    = bool
   default = true
+}
+
+variable "gcs_config" {
+  type = object({
+    bucket_name   = string
+  })
 }

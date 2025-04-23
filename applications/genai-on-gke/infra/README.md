@@ -8,6 +8,7 @@
 4. GKE Setup
 5. Llama
 
+- Repsoitory name -->  don't use _
 
 ```hcl
 project_id = "ai-infra-poc"
@@ -33,4 +34,6 @@ network_config = {
       }
     ]
   }
-}```
+}
+repository_name = "gke_docker_repo"
+```

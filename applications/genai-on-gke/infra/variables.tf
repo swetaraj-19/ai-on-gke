@@ -167,7 +167,7 @@ variable "gke_config" {
     })
     cluster_region                       = string
     cluster_zones                        = list(string)
-    kubernetes_version                   = optional(string, "1.29.13-gke.1038000")
+    kubernetes_version                   = optional(string, "1.31.6-gke.1064001")
     release_channel                      = optional(string, "REGULAR")
     ip_range_pods                        = string
     ip_range_services                    = string
@@ -177,6 +177,9 @@ variable "gke_config" {
       cidr_block   = string
       display_name = optional(string)
     })), [])
+    gce_pd_csi_driver           = optional(bool, false)
+    gcs_fuse_csi_driver         = optional(bool, false)
+    local_nvme_ssd_count        = optional(number, 0)
     cpu_pools                   = list(map(any))
     enable_gpu                  = optional(bool, true)
     gpu_pools                   = list(map(any))

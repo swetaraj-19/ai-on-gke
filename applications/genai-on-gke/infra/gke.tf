@@ -42,7 +42,7 @@ module "public-gke-standard-cluster" {
   all_node_pools_metadata     = var.gke_config.all_node_pools_metadata
   all_node_pools_tags         = var.gke_config.all_node_pools_tags
 
- depends_on = [
+  depends_on = [
     google_project_service.project_services,
     module.vpc_network,
     module.firewall_rules,
@@ -116,7 +116,7 @@ module "private-gke-standard-cluster" {
   all_node_pools_labels       = var.gke_config.all_node_pools_labels
   all_node_pools_metadata     = var.gke_config.all_node_pools_metadata
   all_node_pools_tags         = var.gke_config.all_node_pools_tags
-
+  
   depends_on = [
     google_project_service.project_services,
     module.vpc_network,
@@ -129,7 +129,7 @@ module "private-gke-standard-cluster" {
 # Private GKE Autopilot Cluster
 # -----------------------------------------------------------------------------
 module "private-gke-autopilot-cluster" {
-  count = var.create_cluster && var.private_cluster && var.autopilot_cluster ? 1 : 0
+  count      = var.create_cluster && var.private_cluster && var.autopilot_cluster ? 1 : 0
   source     = "../../../modules/gke-autopilot-private-cluster"
   project_id = var.project_id
 
@@ -148,8 +148,8 @@ module "private-gke-autopilot-cluster" {
   ip_range_pods              = var.gke_config.ip_range_pods
   ip_range_services          = var.gke_config.ip_range_services
   master_authorized_networks = var.gke_config.master_authorized_networks
-  
-   depends_on = [
+
+  depends_on = [
     google_project_service.project_services,
     module.vpc_network,
     module.firewall_rules,
